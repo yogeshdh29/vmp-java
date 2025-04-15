@@ -7,10 +7,10 @@ IMAGE_TAG=$2
 CONTAINER_NAME="vmp-java-app"
 
 echo "Logging in to ECR..."
-if ! aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin "$ECR_REPO_URL"
+if ! aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin "$ECR_REPO_URL"; then
   echo "ECR login failed!"
   exit 1
-fi  
+fi
 
 echo "Stopping old container if exists..."
 docker stop $CONTAINER_NAME || true
