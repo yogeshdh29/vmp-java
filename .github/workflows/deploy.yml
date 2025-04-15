@@ -1,0 +1,50 @@
+name: CI/CD to AWS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      ECR_REPO_NAME: vmp-java
+      IMAGE_TAG: latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, Tag, and Push Docker Image
+        run: |
+          ECR_REGISTRY=${{ steps.login-ecr.outputs.registry }}
+          docker build -t $ECR_REPO_NAME:$IMAGE_TAG .
+          docker tag $ECR_REPO_NAME:$IMAGE_TAG $ECR_REGISTRY/$ECR_REPO_NAME:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$ECR_REPO_NAME:$IMAGE_TAG
+
+      - name: Deploy on EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            bash -s <<'EOF'
+              cd /home/ec2-user
+              curl -O https://raw.githubusercontent.com/yogeshdh29/vmp-java/main/scripts/deploy.sh
+              chmod +x deploy.sh
+              ./deploy.sh ${{ steps.login-ecr.outputs.registry }}/vmp-java latest
+            EOF

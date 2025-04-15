@@ -10,5 +10,8 @@ COPY target/*.jar app.jar
 # Expose port
 EXPOSE 9193
 
+# Set default profile to 'local', overrideable by environment variable
+ENV SPRING_PROFILES_ACTIVE=local
+
 # Use ENTRYPOINT with profile support
 ENTRYPOINT ["java", "-jar", "app.jar"]
