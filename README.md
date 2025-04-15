@@ -55,3 +55,6 @@ To set up GitHub Actions:
 
     
 You can view and edit the workflows in the .github/workflows directory.
+
+## Sample REST Endpoint deployed on AWS 
+http://54.86.164.83:8080/api/v1/categories/all
