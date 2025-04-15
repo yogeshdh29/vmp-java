@@ -113,7 +113,7 @@ resource "aws_instance" "spring_app" {
               service docker start
               usermod -a -G docker ec2-user
                docker run -d \
-                 -p 8080:9193 \
+                 -p 8080:8080 \
                  --name vendor-marketplace \
                  --env SPRING_DATASOURCE_URL=jdbc:mysql://${aws_db_instance.spring_db.address}:3306/springdb \
                  --env SPRING_DATASOURCE_USERNAME=${aws_db_instance.spring_db.username} \

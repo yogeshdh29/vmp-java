@@ -22,7 +22,7 @@ echo "Pulling latest image from ECR..."
 docker pull "$ECR_REPO_URL:$IMAGE_TAG"
 
 echo "Running new container..."
-docker run -d --name $CONTAINER_NAME -p 8080:9193 \
+docker run -d --name $CONTAINER_NAME -p 8080:8080 \
   --env SPRING_PROFILES_ACTIVE=aws \
   --env-file /home/ec2-user/vmp-env.list \
   "$ECR_REPO_URL:$IMAGE_TAG"

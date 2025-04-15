@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/*.jar app.jar
 
 # Expose port
-EXPOSE 9193
+EXPOSE 8080
 
 # Set default profile to 'local', overrideable by environment variable
 ENV SPRING_PROFILES_ACTIVE=local

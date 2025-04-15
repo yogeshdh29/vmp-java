@@ -19,7 +19,7 @@ services:
       dockerfile: Dockerfile
     container_name: vendor-marketplace
     ports:
-      - "9193:9193"
+      - "8080:8080"
     depends_on:
       - db
     environment:
