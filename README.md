@@ -47,7 +47,7 @@ Terraform is used to provision the required AWS services for the project. Follow
 ✅ 1. AWS Provider Configuration
 ```javascript
 provider "aws" {
-region = "us-east-1"
+   region = "us-east-1"
 }
 ```
 * This tells Terraform: "Use AWS services in the us-east-1 region.".
