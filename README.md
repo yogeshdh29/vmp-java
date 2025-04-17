@@ -338,5 +338,34 @@ To set up GitHub Actions:
     
 You can view and edit the workflows in the .github/workflows directory.
 
+### GitHub Actions CI/CD (deploy.yml)
+#### Trigger: When you push to the main branch.
+
+#### 🔄 What Happens:
+
+Step  | Action
+------------- | -------------
+✅ Checkout  | Gets your code into the CI server.
+⚙️ Java Setup  | Installs Java 17 (Temurin distribution).
+🛠️ Maven Build | Compiles Java code, skips tests for speed..
+🔐 AWS Credentials  | Authenticates with AWS using GitHub secrets..
+🔑 ECR Login  | Logs into AWS ECR (Elastic Container Registry)..
+🐳 Build & Push Docker  | Builds Docker image, tags it as latest, pushes it to ECR..
+🔌 SSH to EC2  | Uses SSH to log into EC2 and trigger deployment script..
+
+
+## 🔁 Bringing It All Together
+
+Step  | Action
+------------- | -------------
+📁 | You push code to GitHub → 
+⚙️ | GitHub Actions runs deploy.yml → 
+🐳 | Builds Docker image → 
+☁️ | Pushes image to AWS ECR →
+🔐 | SSHs into EC2 →
+🚀 | Runs deploy.sh →
+📦 | Pulls new image and restarts container →
+🌐 | Java SpringBoot App live on EC2
+
 ## Sample REST Endpoint deployed on AWS 
 http://54.86.164.83:8080/api/v1/categories/all
