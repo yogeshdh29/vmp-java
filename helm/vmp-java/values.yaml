@@ -1,0 +1,14 @@
+replicaCount: 2
+
+image:
+  repository: 058264219845.dkr.ecr.us-east-1.amazonaws.com/vmp-java
+  tag: latest
+
+containerPort: 8080
+
+service:
+  type: LoadBalancer
+  port: 80
+
+env:
+  SPRING_PROFILES_ACTIVE: aws
