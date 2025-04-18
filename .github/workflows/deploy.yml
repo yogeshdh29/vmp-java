@@ -60,33 +60,33 @@ jobs:
               ./deploy.sh ${{ steps.login-ecr.outputs.registry }}/vmp-java latest
             EOF
 
-      - name: Install Helm
-        uses: azure/setup-helm@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set up kubectl
-        uses: azure/setup-kubectl@v3
-        with:
-          version: 'v1.27.0'
-
-      - name: Update kubeconfig for EKS
-        run: |
-          aws eks update-kubeconfig --name vmp-eks-cluster --region $AWS_REGION
-
-      - name: Check Kubernetes contexts
-        run: |
-          kubectl config get-contexts
-          kubectl config current-context
-
-      - name: Verify Kubernetes Access
-        run: kubectl get nodes
-
-      - name: Check Helm version
-        run: helm version
-
-      - name: Deploy to EKS using Helm
-        run: |
-          helm upgrade --install vmp-java ./helm/vmp-java \
-            --set image.repository=${{ steps.login-ecr.outputs.registry }}/vmp-java \
-            --set image.tag=latest
+#      - name: Install Helm
+#        uses: azure/setup-helm@v3
+#        with:
+#          token: ${{ secrets.GITHUB_TOKEN }}
+#
+#      - name: Set up kubectl
+#        uses: azure/setup-kubectl@v3
+#        with:
+#          version: 'v1.27.0'
+#
+#      - name: Update kubeconfig for EKS
+#        run: |
+#          aws eks update-kubeconfig --name vmp-eks-cluster --region $AWS_REGION
+#
+#      - name: Check Kubernetes contexts
+#        run: |
+#          kubectl config get-contexts
+#          kubectl config current-context
+#
+#      - name: Verify Kubernetes Access
+#        run: kubectl get nodes
+#
+#      - name: Check Helm version
+#        run: helm version
+#
+#      - name: Deploy to EKS using Helm
+#        run: |
+#          helm upgrade --install vmp-java ./helm/vmp-java \
+#            --set image.repository=${{ steps.login-ecr.outputs.registry }}/vmp-java \
+#            --set image.tag=latest
