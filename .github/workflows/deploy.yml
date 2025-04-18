@@ -72,6 +72,17 @@ jobs:
         run: |
           aws eks update-kubeconfig --name vmp-eks-cluster --region $AWS_REGION
 
+      - name: Check Kubernetes contexts
+        run: |
+          kubectl config get-contexts
+          kubectl config current-context
+
+      - name: Verify Kubernetes Access
+        run: kubectl get nodes
+
+      - name: Check Helm version
+        run: helm version
+
       - name: Deploy to EKS using Helm
         run: |
           helm upgrade --install vmp-java ./helm/vmp-java \
