@@ -1,7 +1,7 @@
 # Java SpringBoot with Terraform(AWS)+Docker+AWS+Github Actions(CI/CD)
 
 ## Overview
-This repository contains the source code and configuration for the Vendor Marketplace Platform (VMP) built with Java. It includes setup for Docker, Terraform to provision AWS services, and GitHub Actions for Continuous Integration/Continuous Deployment (CI/CD).
+This repository contains the source code and configuration for the Marketplace Platform built with Java SpringBoot Microservices. It includes setup for Docker, Terraform to provision AWS services, and GitHub Actions for Continuous Integration/Continuous Deployment (CI/CD).
 
 ## Local Setup with Docker
 
