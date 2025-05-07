@@ -1,5 +1,6 @@
 package com.entrata.vendormarketplace.service.product;
 
+import com.entrata.vendormarketplace.dto.ProductDto;
 import com.entrata.vendormarketplace.model.Product;
 import com.entrata.vendormarketplace.request.AddProductRequest;
 import com.entrata.vendormarketplace.request.ProductUpdateRequest;
@@ -18,4 +19,8 @@ public interface IProductService {
     List<Product> getProductsByName(String name);
     List<Product> getProductsByBrandAndName(String brand, String name);
     Long countProductsByBrandAndName(String brand, String name);
+
+    List<ProductDto> getConvertedProducts(List<Product> products);
+
+    ProductDto convertToDto(Product product);
 }
