@@ -368,4 +368,4 @@ Step  | Action
 🌐 | Java SpringBoot App live on EC2
 
 ## Sample REST Endpoint deployed on AWS 
-http://54.86.164.83:8080/api/v1/categories/all
+http://23.22.118.191:8080/api/v1/products/all
