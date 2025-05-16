@@ -1,4 +1,4 @@
-package com.entrata.vendormarketplace.config;
+package com.entrata.vendormarketplace.security.config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
